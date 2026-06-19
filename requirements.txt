@@ -1,0 +1,5 @@
+# CacheLab runtime install (no third-party dependencies):
+#   python -m pip install -r requirements.txt
+#
+# For development (tests, lint, type-check, pre-commit), use requirements-dev.txt.
+-e .
