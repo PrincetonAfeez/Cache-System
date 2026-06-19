@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cachelab"
+version = "0.1.0"
+description = "A CLI-first concurrent cache systems capstone with eviction, TTL, workers, and write-back semantics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Princeton Afeez", email = "princetonafeez@gmail.com" }]
+keywords = ["cache", "lru", "lfu", "fifo", "ttl", "concurrency", "cli"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+# Bounded ranges keep resolution reproducible; requirements-dev.txt pins exact
+# versions for a fully locked dev environment.
+dev = [
+  "pytest>=8,<10",
+  "pytest-cov>=5,<8",
+  "mypy>=1.8,<3",
+  "ruff>=0.8,<1",
+  "pre-commit>=4,<5",
+]
+
+[project.scripts]
+cachelab = "cachelab.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+# Test bodies stay strict-typed, but pytest fixtures and intentional misuse
+# (e.g. asserting a frozen dataclass rejects assignment) need a little slack.
+module = "tests.*"
+disallow_untyped_decorators = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.coverage.run]
+source = ["cachelab"]
+branch = false
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 99
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"
