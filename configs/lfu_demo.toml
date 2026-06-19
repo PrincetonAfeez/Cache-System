@@ -1,0 +1,8 @@
+[cache]
+capacity = 20
+policy = "lfu"
+shard_count = 2
+worker_count = 1
+scheduler_interval = 0.5
+queue_size = 128
+write_mode = "cache-only"

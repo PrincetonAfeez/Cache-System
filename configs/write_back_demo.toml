@@ -1,0 +1,10 @@
+[cache]
+capacity = 100
+policy = "lru"
+shard_count = 4
+worker_count = 2
+queue_size = 256
+write_mode = "write-back"
+write_back_retry_count = 3
+write_back_retry_delay = 0.01
+shutdown_flush = true

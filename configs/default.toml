@@ -1,0 +1,14 @@
+[cache]
+capacity = 128
+default_ttl = 60.0
+policy = "lru"
+shard_count = 4
+worker_count = 2
+backend = "memory"
+write_mode = "cache-only"
+scheduler_interval = 1.0
+queue_size = 1024
+write_back_retry_count = 2
+write_back_retry_delay = 0.01
+shutdown_flush = true
+active_expiration = true
