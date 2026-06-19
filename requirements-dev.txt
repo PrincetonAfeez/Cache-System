@@ -1,0 +1,11 @@
+# Pinned development toolchain for reproducible CI and local dev runs:
+#   python -m pip install -r requirements-dev.txt
+#
+# Matches .github/workflows/ci.yml: pre-commit (ruff + mypy), pytest, coverage.
+# The library itself has ZERO runtime dependencies (standard library only).
+-e .
+pytest==9.0.3
+pytest-cov==7.0.0
+mypy==2.1.0
+ruff==0.14.13
+pre-commit==4.5.1
