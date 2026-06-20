@@ -1,0 +1,17 @@
+{
+  "name": "CacheLab Schema Index",
+  "schema_version": "1.0.0",
+  "json_schema_draft": "2020-12",
+  "schemas": [
+    { "file": "cache_config.schema.json", "purpose": "CacheConfig-compatible settings" },
+    { "file": "cache_config_toml_container.schema.json", "purpose": "Full TOML document shape after conversion to JSON" },
+    { "file": "cli_state.schema.json", "purpose": "Basic CLI JSON state file" },
+    { "file": "cli_state_entry.schema.json", "purpose": "One persisted CLI cache entry" },
+    { "file": "cache_entry_snapshot.schema.json", "purpose": "Inspect/dump entry snapshot" },
+    { "file": "cache_stats_snapshot.schema.json", "purpose": "Cache-level stats snapshot" },
+    { "file": "shard_stats_snapshot.schema.json", "purpose": "Per-shard stats snapshot" },
+    { "file": "policy_stats_snapshot.schema.json", "purpose": "Eviction-policy stats snapshot" },
+    { "file": "worker_job.schema.json", "purpose": "Worker queue job union" },
+    { "file": "simulation_result.schema.json", "purpose": "Simulation and benchmark output records" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/worker_job_expire_shard.schema.json",
+  "title": "ExpireShard Job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "shard_index"],
+  "properties": {
+    "type": { "const": "ExpireShard" },
+    "shard_index": { "type": "integer", "minimum": 0 }
+  }
+}

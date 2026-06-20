@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/worker_job_preload_key.schema.json",
+  "title": "PreloadKey Job",
+  "description": "Interchange schema for preload metadata. The Python loader callable is intentionally represented by loader_ref because callables are not JSON-serializable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "shard_index", "key", "loader_ref"],
+  "properties": {
+    "type": { "const": "PreloadKey" },
+    "shard_index": { "type": "integer", "minimum": 0 },
+    "key": { "description": "Any JSON-serializable cache key." },
+    "loader_ref": { "type": "string", "minLength": 1 },
+    "ttl": { "type": ["number", "null"], "exclusiveMinimum": 0, "default": null },
+    "ttl_supplied": { "type": "boolean", "default": false }
+  }
+}

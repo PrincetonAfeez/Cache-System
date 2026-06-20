@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/cache_stats_snapshot.schema.json",
+  "title": "CacheLab Cache Stats Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hits", "misses", "hit_ratio", "puts", "deletes", "evictions", "expirations", "size", "capacity", "queue_depth", "queue_dropped", "worker_jobs_completed", "worker_jobs_failed", "write_back_retries", "stale_write_back_jobs_skipped", "flush_failures", "shutdown_flush_failures", "shards"],
+  "properties": {
+    "hits": { "type": "integer", "minimum": 0 },
+    "misses": { "type": "integer", "minimum": 0 },
+    "hit_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "puts": { "type": "integer", "minimum": 0 },
+    "deletes": { "type": "integer", "minimum": 0 },
+    "evictions": { "type": "integer", "minimum": 0 },
+    "expirations": { "type": "integer", "minimum": 0 },
+    "size": { "type": "integer", "minimum": 0 },
+    "capacity": { "type": "integer", "minimum": 1 },
+    "queue_depth": { "type": "integer", "minimum": 0 },
+    "queue_dropped": { "type": "integer", "minimum": 0 },
+    "worker_jobs_completed": { "type": "integer", "minimum": 0 },
+    "worker_jobs_failed": { "type": "integer", "minimum": 0 },
+    "write_back_retries": { "type": "integer", "minimum": 0 },
+    "stale_write_back_jobs_skipped": { "type": "integer", "minimum": 0 },
+    "flush_failures": { "type": "integer", "minimum": 0 },
+    "shutdown_flush_failures": { "type": "integer", "minimum": 0 },
+    "shards": {
+      "type": "array",
+      "items": { "$ref": "shard_stats_snapshot.schema.json" }
+    }
+  }
+}

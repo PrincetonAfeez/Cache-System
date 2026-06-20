@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/policy_stats_snapshot.schema.json",
+  "title": "CacheLab Policy Stats Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "evictions", "tracked_keys", "metadata_size"],
+  "properties": {
+    "name": { "type": "string", "enum": ["lru", "lfu", "fifo", "LRU", "LFU", "FIFO"] },
+    "evictions": { "type": "integer", "minimum": 0 },
+    "tracked_keys": { "type": "integer", "minimum": 0 },
+    "metadata_size": { "type": "integer", "minimum": 0 }
+  }
+}

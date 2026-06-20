@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/shard_stats_snapshot.schema.json",
+  "title": "CacheLab Shard Stats Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["index", "size", "capacity", "hits", "misses", "puts", "deletes", "evictions", "expirations", "lock_contention", "policy"],
+  "properties": {
+    "index": { "type": "integer", "minimum": 0 },
+    "size": { "type": "integer", "minimum": 0 },
+    "capacity": { "type": "integer", "minimum": 1 },
+    "hits": { "type": "integer", "minimum": 0 },
+    "misses": { "type": "integer", "minimum": 0 },
+    "puts": { "type": "integer", "minimum": 0 },
+    "deletes": { "type": "integer", "minimum": 0 },
+    "evictions": { "type": "integer", "minimum": 0 },
+    "expirations": { "type": "integer", "minimum": 0 },
+    "lock_contention": { "type": "integer", "minimum": 0 },
+    "policy": { "$ref": "policy_stats_snapshot.schema.json" }
+  }
+}

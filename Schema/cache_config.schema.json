@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/cache_config.schema.json",
+  "title": "CacheLab Cache Configuration",
+  "description": "Schema for CacheConfig-compatible configuration. Applies to either a top-level object or the [cache] table in TOML after TOML is converted to JSON.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "capacity": { "type": "integer", "minimum": 1, "default": 128 },
+    "default_ttl": { "type": ["number", "null"], "minimum": 0, "default": null },
+    "default TTL": { "type": ["number", "null"], "minimum": 0, "deprecated": true, "description": "Alias for default_ttl." },
+    "default_ttl_seconds": { "type": ["number", "null"], "minimum": 0, "deprecated": true, "description": "Alias for default_ttl." },
+    "policy": { "type": "string", "enum": ["lru", "lfu", "fifo"], "default": "lru" },
+    "shard_count": { "type": "integer", "minimum": 1, "default": 1 },
+    "shards": { "type": "integer", "minimum": 1, "deprecated": true, "description": "Alias for shard_count." },
+    "worker_count": { "type": "integer", "minimum": 0, "default": 0 },
+    "workers": { "type": "integer", "minimum": 0, "deprecated": true, "description": "Alias for worker_count." },
+    "backend": { "type": "string", "enum": ["memory"], "default": "memory" },
+    "write_mode": { "type": "string", "enum": ["cache-only", "write-through", "write-back"], "default": "cache-only" },
+    "scheduler_interval": { "type": "number", "minimum": 0, "default": 1.0 },
+    "queue_size": { "type": "integer", "minimum": 0, "default": 0 },
+    "queue_maxsize": { "type": "integer", "minimum": 0, "deprecated": true, "description": "Alias for queue_size." },
+    "write_back_retry_count": { "type": "integer", "minimum": 0, "default": 2 },
+    "retry_count": { "type": "integer", "minimum": 0, "deprecated": true, "description": "Alias for write_back_retry_count." },
+    "write_back_retry_delay": { "type": "number", "minimum": 0, "default": 0.01 },
+    "retry_delay": { "type": "number", "minimum": 0, "deprecated": true, "description": "Alias for write_back_retry_delay." },
+    "shutdown_flush": { "type": "boolean", "default": true },
+    "shutdown_timeout": { "type": "number", "minimum": 0, "default": 5.0 },
+    "active_expiration": { "type": "boolean", "default": true },
+    "queue_put_timeout": { "type": "number", "minimum": 0, "default": 1.0 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "active_expiration": { "const": true } } },
+      "then": { "properties": { "scheduler_interval": { "exclusiveMinimum": 0 } } }
+    }
+  ],
+  "$comment": "CacheLab also requires capacity >= shard_count; enforce that rule in application validation because standard JSON Schema cannot compare sibling numeric fields portably."
+}

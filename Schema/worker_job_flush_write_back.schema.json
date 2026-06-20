@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/worker_job_flush_write_back.schema.json",
+  "title": "FlushWriteBack Job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "shard_index", "key", "value", "version", "operation", "retries_left"],
+  "properties": {
+    "type": { "const": "FlushWriteBack" },
+    "shard_index": { "type": "integer", "minimum": 0 },
+    "key": { "description": "Any JSON-serializable cache key." },
+    "value": { "description": "Any JSON-serializable cache value." },
+    "version": { "type": "integer", "minimum": 0 },
+    "operation": { "type": "string", "enum": ["put", "delete"] },
+    "retries_left": { "type": "integer", "minimum": 0 },
+    "attempt": { "type": "integer", "minimum": 0, "default": 0 }
+  }
+}

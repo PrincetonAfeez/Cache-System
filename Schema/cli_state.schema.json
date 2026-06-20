@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/cli_state.schema.json",
+  "title": "CacheLab CLI State File",
+  "description": "Schema for the JSON state file used by basic CLI commands.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["config", "entries"],
+  "properties": {
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capacity", "policy", "shard_count", "default_ttl"],
+      "properties": {
+        "capacity": { "type": "integer", "minimum": 1 },
+        "policy": { "type": "string", "enum": ["lru", "lfu", "fifo"] },
+        "shard_count": { "type": "integer", "minimum": 1 },
+        "default_ttl": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "cli_state_entry.schema.json" }
+    }
+  }
+}

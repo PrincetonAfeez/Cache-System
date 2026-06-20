@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/cache_entry_snapshot.schema.json",
+  "title": "CacheLab Entry Snapshot",
+  "description": "Diagnostic cache entry snapshot returned by inspect/dump-style APIs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["key", "value", "created_at", "last_accessed_at", "hit_count", "expires_at", "ttl", "ttl_remaining", "version", "dirty"],
+  "properties": {
+    "key": { "description": "Any JSON-serializable representation of the cache key." },
+    "value": { "description": "Any JSON-serializable representation of the cache value." },
+    "created_at": { "type": "number", "minimum": 0 },
+    "last_accessed_at": { "type": "number", "minimum": 0 },
+    "hit_count": { "type": "integer", "minimum": 0 },
+    "expires_at": { "type": ["number", "null"], "minimum": 0 },
+    "ttl": { "type": ["number", "null"], "minimum": 0 },
+    "ttl_remaining": { "type": ["number", "null"], "minimum": 0 },
+    "version": { "type": "integer", "minimum": 0 },
+    "dirty": { "type": "boolean" }
+  }
+}

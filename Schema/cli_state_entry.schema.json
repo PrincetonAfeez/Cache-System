@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/cli_state_entry.schema.json",
+  "title": "CacheLab CLI State Entry",
+  "description": "Persisted entry emitted by CacheLab's basic CLI state save path. A legacy expires_wall field is accepted for older state files.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["key"],
+  "properties": {
+    "key": { "description": "Any JSON-serializable cache key." },
+    "value": { "description": "Any JSON-serializable cache value." },
+    "ttl_remaining": { "type": ["number", "null"], "exclusiveMinimum": 0, "description": "Remaining TTL in seconds; null means no expiration." },
+    "expires_wall": { "type": ["number", "null"], "deprecated": true, "description": "Legacy wall-clock expiration timestamp accepted during migration." },
+    "hit_count": { "type": "integer", "minimum": 0, "default": 0 }
+  },
+  "anyOf": [
+    { "required": ["ttl_remaining"] },
+    { "required": ["expires_wall"] },
+    { "not": { "anyOf": [{ "required": ["ttl_remaining"] }, { "required": ["expires_wall"] }] } }
+  ]
+}

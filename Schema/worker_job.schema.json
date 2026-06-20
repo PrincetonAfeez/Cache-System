@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cachelab/schema/worker_job.schema.json",
+  "title": "CacheLab Worker Job Message",
+  "description": "Serializable representation of worker queue messages. The Python dataclasses do not include a type discriminator, so this schema adds type for interchange.",
+  "oneOf": [
+    { "$ref": "worker_job_expire_shard.schema.json" },
+    { "$ref": "worker_job_flush_write_back.schema.json" },
+    { "$ref": "worker_job_preload_key.schema.json" },
+    { "$ref": "worker_job_snapshot_stats.schema.json" },
+    { "$ref": "worker_job_stop_worker.schema.json" }
+  ]
+}
