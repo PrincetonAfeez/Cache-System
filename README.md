@@ -110,6 +110,9 @@ without storing partial values. If only the background write-back flush is
 backpressured (not the load itself), the loaded value is still published to
 waiters and cached — the durable flush is simply deferred.
 
+See [ADR 0005](docs/adr/0005-concurrency-and-shutdown.md) for acknowledged
+deadlock/starvation risks and shutdown trade-offs.
+
 ## Queue And Workers
 
 Workers consume explicit dataclass messages: `ExpireShard`, `FlushWriteBack`,
@@ -215,6 +218,19 @@ The `cachelab demo unsafe-*` commands are isolated teaching examples:
 
 The production cache prevents these with shard locks, single-flight events,
 write-back versions/tombstones, and monotonic clocks.
+
+## Architecture Decision Records
+
+This project documents major design decisions in [`docs/adr/`](docs/adr/):
+
+- [`0001-cache-architecture.md`](docs/adr/0001-cache-architecture.md) — sharded facade and policy abstraction
+- [`0002-ttl-expiration-model.md`](docs/adr/0002-ttl-expiration-model.md) — monotonic clock, lazy and active expiration
+- [`0003-worker-queue-and-write-back.md`](docs/adr/0003-worker-queue-and-write-back.md) — job queues, backpressure, versioning
+- [`0004-cli-state-file-format.md`](docs/adr/0004-cli-state-file-format.md) — plaintext JSON state persistence
+- [`0005-concurrency-and-shutdown.md`](docs/adr/0005-concurrency-and-shutdown.md) — concurrency risks, shutdown, and backpressure trade-offs
+
+These ADRs explain the trade-offs behind sharding, TTL expiration, worker queues,
+write-back consistency, CLI state persistence, and shutdown behavior.
 
 ## Testing
 
